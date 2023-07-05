@@ -2,6 +2,10 @@
 
 ## Descripción
 
+Haciendo uso de alguna de las posibles formas con las que se puede interactuar con un API,
+el usuario debería de ver una serie de cambios en la interfaz web cada vez que se le de la
+indicación al juego de que debe de actualizarse
+
 ## Diagrama de componentes
 
 <p align="center">
