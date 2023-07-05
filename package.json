@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon index.js",
-    "start-deploy": "node index.js"
+    "start-deploy": "node index.js",
+    "create": "bash generate.sh"
   },
   "repository": {
     "type": "git",
