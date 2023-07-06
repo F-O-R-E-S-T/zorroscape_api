@@ -8,36 +8,36 @@ const { config } = require("../config");
   o abajo respectivamente. Tambien está el ataque y el salto
 */
 
-router.post("/up", async (req, res) => {
+router.put("/up", async (req, res) => {
   try {
-    const status = movementService.setUp();
+    const status = await movementService.setUp();
     res.status(200).json(status);
   } catch (error) {
     console.error(error);
   }
 });
 
-router.post("/right", async (req, res) => {
+router.put("/right", async (req, res) => {
   try {
-    const status = movementService.setRight();
+    const status = await movementService.setRight();
     res.status(200).json(status);
   } catch (error) {
     console.error(error);
   }
 });
 
-router.post("/left", async (req, res) => {
+router.put("/left", async (req, res) => {
   try {
-    const status = movementService.setLeft();
+    const status = await movementService.setLeft();
     res.status(200).json(status);
   } catch (error) {
     console.error(error);
   }
 });
 
-router.post("/down", async (req, res) => {
+router.put("/down", async (req, res) => {
   try {
-    const status = movementService.setDown();
+    const status = await movementService.setDown();
     res.status(200).json(status);
   } catch (error) {
     console.error(error);

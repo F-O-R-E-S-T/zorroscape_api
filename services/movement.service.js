@@ -4,10 +4,53 @@ class MovementService extends FileService {
   constructor() {
     super();
   }
-  setRight() {}
-  setLeft() {}
-  setDown() {}
-  setUp() {}
+  async setRight() {
+    let current = await this.getFileData();
+
+    const update = {
+      ...current[0],
+    };
+    update.data.x = current[0].data.y + 10
+
+    await this.updateFile(update.fileName, update.data)
+    return update.data;
+  }
+
+  async setLeft() {
+    let current = await this.getFileData();
+
+    const update = {
+      ...current[0],
+    };
+    update.data.x = current[0].data.y - 10
+
+    await this.updateFile(update.fileName, update.data)
+    return update.data;
+  }
+
+  async setDown() {
+    let current = await this.getFileData();
+
+    const update = {
+      ...current[0],
+    };
+    update.data.y = current[0].data.y - 10
+
+    await this.updateFile(update.fileName, update.data)
+    return update.data;
+  }
+
+  async setUp() {
+    let current = await this.getFileData();
+
+    const update = {
+      ...current[0],
+    };
+    update.data.y = current[0].data.y + 10
+
+    await this.updateFile(update.fileName, update.data)
+    return update.data;
+  }
 }
 
 module.exports = new MovementService();
