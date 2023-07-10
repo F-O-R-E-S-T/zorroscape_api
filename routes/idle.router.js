@@ -23,7 +23,7 @@ router.get("/win", async (req, res) => {
 */
 router.get("/current", async (req, res) => {
   try {
-    const status = idleService.getCurrent();
+    const status = await idleService.getCurrent();
     res.status(200).json(status);
   } catch (error) {
     console.error(error);
