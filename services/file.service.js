@@ -57,22 +57,22 @@ class FileService {
   async updateFile(fileName, rawData) {
     try {
       let data = JSON.stringify(rawData);
-      fs.writeFileSync(`${this.filePath}/${fileName}`, data);
+      await fs.writeFileSync(`${this.filePath}/${fileName}`, data);
     } catch (error) {
       console.error("[ERROR - updateFile]:", error);
     }
   }
 
-  deleteRef(fileName) {
-    let deleted = true;
-    fs.unlink(`${this.basePath}/${fileName}.${fileType}`, (error) => {
-      if (error) {
-        console.error("[ERROR - deleteRef]:", error);
-        deleted = !deleted;
-      }
-    });
-
-    return deleted;
+  async deleteRef(fileName) {
+    let isDeleted;
+    try {
+      await fs.unlinkSync(`${this.basePath}/${fileName}`);
+      isDeleted = true;
+    } catch (error) {
+      console.error("[ERROR - deleteRef]:", error);
+      isDeleted = false;
+    }
+    return isDeleted;
   }
 }
 
