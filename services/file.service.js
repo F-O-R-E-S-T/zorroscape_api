@@ -8,43 +8,71 @@ class FileService {
   }
 
   async getFiles() {
-    const files = await fs.readdirSync(this.filePath);
-    return files;
+    try {
+      const files = await fs.readdirSync(this.filePath);
+      return files;
+    } catch (error) {
+      console.error("[ERROR - getFiles]:", error);
+    }
   }
 
   async getFileInfo() {
-    const files = await this.getFiles();
-    const info = [];
+    try {
+      const files = await this.getFiles();
+      const info = [];
 
-    files.forEach((file) => {
-      const data = fs.statSync(`${this.filePath}/${file}`);
-      info.push({
-        fileSize: castToBytes(data.size),
-        fileName: file,
+      files.forEach((file) => {
+        const data = fs.statSync(`${this.filePath}/${file}`);
+        info.push({
+          fileSize: castToBytes(data.size),
+          fileName: file,
+        });
       });
-    });
 
-    return info;
+      return info;
+    } catch (error) {
+      console.error("[ERROR - getFileInfo]:", error);
+    }
   }
 
   async getFileData() {
-    const files = await this.getFiles();
-    const info = [];
+    try {
+      const files = await this.getFiles();
+      const info = [];
 
-    files.forEach((file) => {
-      const rawData = fs.readFileSync(`${this.filePath}/${file}`);
-      info.push({
-        fileName: file,
-        data: JSON.parse(rawData),
+      files.forEach((file) => {
+        const rawData = fs.readFileSync(`${this.filePath}/${file}`);
+        info.push({
+          fileName: file,
+          data: JSON.parse(rawData),
+        });
       });
-    });
 
-    return info;
+      return info;
+    } catch (error) {
+      console.error("[ERROR - getFileData]:", error);
+    }
   }
 
   async updateFile(fileName, rawData) {
-    let data = JSON.stringify(rawData);
-    fs.writeFileSync(fileName, data);
+    try {
+      let data = JSON.stringify(rawData);
+      fs.writeFileSync(`${this.filePath}/${fileName}`, data);
+    } catch (error) {
+      console.error("[ERROR - updateFile]:", error);
+    }
+  }
+
+  deleteRef(fileName) {
+    let deleted = true;
+    fs.unlink(`${this.basePath}/${fileName}.${fileType}`, (error) => {
+      if (error) {
+        console.error("[ERROR - deleteRef]:", error);
+        deleted = !deleted;
+      }
+    });
+
+    return deleted;
   }
 }
 
