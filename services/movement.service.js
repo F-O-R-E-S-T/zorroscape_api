@@ -10,9 +10,9 @@ class MovementService extends FileService {
     const update = {
       ...current[0],
     };
-    update.data.x = current[0].data.y + 10
+    update.data.x = current[0].data.x + 10;
 
-    await this.updateFile(update.fileName, update.data)
+    await this.updateFile(update.fileName, update.data);
     return update.data;
   }
 
@@ -22,9 +22,9 @@ class MovementService extends FileService {
     const update = {
       ...current[0],
     };
-    update.data.x = current[0].data.y - 10
+    update.data.x = current[0].data.x - 10;
 
-    await this.updateFile(update.fileName, update.data)
+    await this.updateFile(update.fileName, update.data);
     return update.data;
   }
 
@@ -34,9 +34,9 @@ class MovementService extends FileService {
     const update = {
       ...current[0],
     };
-    update.data.y = current[0].data.y - 10
+    update.data.y = current[0].data.y - 10;
 
-    await this.updateFile(update.fileName, update.data)
+    await this.updateFile(update.fileName, update.data);
     return update.data;
   }
 
@@ -46,9 +46,9 @@ class MovementService extends FileService {
     const update = {
       ...current[0],
     };
-    update.data.y = current[0].data.y + 10
+    update.data.y = current[0].data.y + 10;
 
-    await this.updateFile(update.fileName, update.data)
+    await this.updateFile(update.fileName, update.data);
     return update.data;
   }
 }
