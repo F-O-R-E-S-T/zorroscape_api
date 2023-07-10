@@ -35,8 +35,8 @@ router.get("/current", async (req, res) => {
 */
 router.post("/start", async (req, res) => {
   try {
-    const msg = idleService.start();
-    res.status(200).send(msg);
+    await idleService.start();
+    res.status(200).send("Game starting");
   } catch (error) {
     console.error(error);
   }
@@ -47,8 +47,12 @@ router.post("/start", async (req, res) => {
 */
 router.delete("/die", async (req, res) => {
   try {
-    const msg = idleService.die();
-    res.status(200).send(msg);
+    const isDeath = await idleService.die();
+    if (isDeath) {
+      res.status(200).send("You died");
+    } else {
+      res.status(400).send("Something went wrong");
+    }
   } catch (error) {
     console.error(error);
   }
