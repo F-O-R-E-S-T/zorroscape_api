@@ -7,6 +7,16 @@ class FileService {
     this.filePath = `${process.cwd()}/${config.appStatusFilePath}`;
   }
 
+  async generateDirectory() {
+    try {
+      if (!fs.existsSync(this.filePath)) {
+        fs.mkdirSync(this.filePath, { recursive: true });
+      }
+    } catch (error) {
+      console.error("[ERROR - generateDirectory]:", error);
+    }
+  }
+
   async getFiles() {
     try {
       const files = await fs.readdirSync(this.filePath);

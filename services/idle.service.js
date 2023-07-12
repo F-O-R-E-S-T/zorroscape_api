@@ -25,6 +25,7 @@ class IdleService extends FileService {
   }
 
   async start() {
+    await this.generateDirectory()
     await this.updateFile("gameStatus.json", this.template);
   }
 
