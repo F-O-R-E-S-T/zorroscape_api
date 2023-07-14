@@ -1,4 +1,4 @@
-const { errorHandler, errorLogger } = require("./middlewares")
+const { errorHandler, errorLogger } = require("./middlewares");
 const { config } = require("./config");
 
 const loadEndpoint = require("./routes");
@@ -39,7 +39,7 @@ app.listen(app.get("port"), () => {
   const deployLog =
     config.env === "development"
       ? `${chalk.green("[SERVER]:")} App running on ${chalk.green(
-          `http://localhost:${app.get("port")}`
+          `http://localhost:${app.get("port")}`,
         )}`
       : `[SERVER]: App running on ${config.appHost}:${app.get("port")}`;
   console.log(deployLog);

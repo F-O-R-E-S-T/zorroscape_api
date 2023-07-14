@@ -1,3 +1,4 @@
+const { requestLogger } = require("../middlewares");
 const router = require("express").Router();
 const { config } = require("../config");
 
@@ -10,6 +11,10 @@ const idleRouter = require("./idle.router");
 const loadEnpoint = (app) => {
   // Over writing default base path
   app.use(`${config.appRoute}`, router);
+
+  if (config.env === "development") {
+    router.use(requestLogger);
+  }
 
   // Base path routes
   router.use("/movement", movementRouter);
